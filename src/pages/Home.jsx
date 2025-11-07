@@ -13,7 +13,7 @@ function Home() {
 			<Navbar/>
 			{/* Main Content */}
 			{/* Footer */}
-			Home
+			
     </div>
   );
 }
