@@ -7,6 +7,9 @@ function HeroSection() {
       id="hero"
       className="relative min-h-screen flex flex-col items-center justify-center px-4"
     >
+      <div className="w-40 4-30 mb-3">
+        <img className="w-full h-full rounded-full object-cover border-4 border-foreground/10 shadow-xs" src="/AnitaDavid.jpg" alt="Anita David" />
+      </div>
       <div className="container max-w-4xl mx-auto text-center z-10">
         <div className="space-y-6">
           <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
