@@ -32,7 +32,8 @@ function About() {
                 Get In Touch
               </a>
               <a
-                href="../assets/AnitaDavid_FrontendEngineer.pdf"
+                href="https://drive.google.com/file/d/1_0Qyv7cHAxNuLqwzx6ZhfdSL0o5K5IB_/view?usp=sharing"
+                target="_blank"
                 download="AnitaDavid_FrontendEngineer.pdf"
                 className="py-2 px-6 rounded-full border-primary text-primary hover:bg-primary/10 transition-colors duration-300"
               >
