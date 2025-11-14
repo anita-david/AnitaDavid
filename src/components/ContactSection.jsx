@@ -8,27 +8,44 @@ import cn from "../lib/utils";
 import { Send } from "lucide-react";
 import { useToast } from "../hooks/use-toast";
 import { useState } from "react";
+import { emailjs } from "emailjs-com";
 
 function ContactSection() {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
   const handleSubmit = (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setTimeout(() => {
-      toast({
-        title: "Message Sent!",
-        description: "Thank you for your message. I'll get back to you soon.",
-      });
-      setIsSubmitting(false);
-      setName("");
-      setEmail("");
-      setMessage("");
-    }, 1500);
-  };
+  e.preventDefault();
+  setIsSubmitting(true);
+
+  emailjs.send(
+    "YOUR_SERVICE_ID",
+    "YOUR_TEMPLATE_ID",
+    formData,
+    "YOUR_PUBLIC_KEY"
+  )
+  .then(() => {
+    toast({
+      title: "Message Sent!",
+      description: "Thank you for your message. I'll get back to you soon.",
+    });
+
+    setFormData({ name: "", email: "", message: "" }); // clear form
+    setIsSubmitting(false);
+  })
+  .catch(() => {
+    toast({
+      title: "Something went wrong",
+      description: "Your message could not be sent.",
+      variant: "destructive",
+    });
+    setIsSubmitting(false);
+  });
+};
   return (
     <section id="contact" className="py-24 px-4 relative bg-secondary/30">
       <div className="container mx-auto max-w-5xl">
@@ -118,8 +135,8 @@ function ContactSection() {
                   type="text"
                   id="name"
                   name="name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  value={formData.name}
+                  onChange={(e) => setFormData({...formData, name: e.target.value})}
                   required
                   className="w-full px-4 py-3 rounded-md border-input bg-background focus:outline-hidden focus:ring-2 focus:ring-primary"
                   placeholder="Anita David..."
@@ -136,8 +153,8 @@ function ContactSection() {
                   type="email"
                   id="email"
                   name="email"
-                  value={email}
-                  onChange={(e)=> setEmail(e.target.value)}
+                  value={formData.email}
+                  onChange={(e) => setFormData({...formData, email: e.target.value})}
                   required
                   className="w-full px-4 py-3 rounded-md border-input bg-background focus:outline-hidden focus:ring-2 focus:ring-primary"
                   placeholder="johndoe@gmail.com"
@@ -153,8 +170,8 @@ function ContactSection() {
                 <textarea
                   id="message"
                   name="message"
-                  value={message}
-                  onChange={(e)=> setMessage(e.target.value)}
+                  value={formData.message}
+                  onChange={(e) => setFormData({...formData, message: e.target.value})}
                   required
                   className="w-full px-4 py-3 rounded-md border-input bg-background focus:outline-hidden focus:ring-2 focus:ring-primary resize-none"
                   placeholder="Hello, I'd like to talk about..."
