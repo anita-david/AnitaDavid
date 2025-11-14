@@ -23,7 +23,7 @@ function ContactSection() {
     setIsSubmitting(true);
 
     emailjs
-      .send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", formData, "YOUR_PUBLIC_KEY")
+      .send("service_2xnh1ho", "template_lr8s3mg", formData, "etcBhqQyM5ZZfX5Se")
       .then(() => {
         toast({
           title: "Message Sent!",
