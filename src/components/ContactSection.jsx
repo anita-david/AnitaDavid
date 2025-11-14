@@ -8,7 +8,7 @@ import cn from "../lib/utils";
 import { Send } from "lucide-react";
 import { useToast } from "../hooks/use-toast";
 import { useState } from "react";
-import { emailjs } from "emailjs-com";
+import emailjs from "@emailjs/browser";
 
 function ContactSection() {
   const { toast } = useToast();
@@ -19,33 +19,29 @@ function ContactSection() {
     message: "",
   });
   const handleSubmit = (e) => {
-  e.preventDefault();
-  setIsSubmitting(true);
+    e.preventDefault();
+    setIsSubmitting(true);
 
-  emailjs.send(
-    "YOUR_SERVICE_ID",
-    "YOUR_TEMPLATE_ID",
-    formData,
-    "YOUR_PUBLIC_KEY"
-  )
-  .then(() => {
-    toast({
-      title: "Message Sent!",
-      description: "Thank you for your message. I'll get back to you soon.",
-    });
+    emailjs
+      .send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", formData, "YOUR_PUBLIC_KEY")
+      .then(() => {
+        toast({
+          title: "Message Sent!",
+          description: "Thank you for your message. I'll get back to you soon.",
+        });
 
-    setFormData({ name: "", email: "", message: "" }); // clear form
-    setIsSubmitting(false);
-  })
-  .catch(() => {
-    toast({
-      title: "Something went wrong",
-      description: "Your message could not be sent.",
-      variant: "destructive",
-    });
-    setIsSubmitting(false);
-  });
-};
+        setFormData({ name: "", email: "", message: "" }); // clear form
+        setIsSubmitting(false);
+      })
+      .catch(() => {
+        toast({
+          title: "Something went wrong",
+          description: "Your message could not be sent.",
+          variant: "destructive",
+        });
+        setIsSubmitting(false);
+      });
+  };
   return (
     <section id="contact" className="py-24 px-4 relative bg-secondary/30">
       <div className="container mx-auto max-w-5xl">
@@ -136,7 +132,9 @@ function ContactSection() {
                   id="name"
                   name="name"
                   value={formData.name}
-                  onChange={(e) => setFormData({...formData, name: e.target.value})}
+                  onChange={(e) =>
+                    setFormData({ ...formData, name: e.target.value })
+                  }
                   required
                   className="w-full px-4 py-3 rounded-md border-input bg-background focus:outline-hidden focus:ring-2 focus:ring-primary"
                   placeholder="Anita David..."
@@ -154,7 +152,9 @@ function ContactSection() {
                   id="email"
                   name="email"
                   value={formData.email}
-                  onChange={(e) => setFormData({...formData, email: e.target.value})}
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
                   required
                   className="w-full px-4 py-3 rounded-md border-input bg-background focus:outline-hidden focus:ring-2 focus:ring-primary"
                   placeholder="johndoe@gmail.com"
@@ -171,7 +171,9 @@ function ContactSection() {
                   id="message"
                   name="message"
                   value={formData.message}
-                  onChange={(e) => setFormData({...formData, message: e.target.value})}
+                  onChange={(e) =>
+                    setFormData({ ...formData, message: e.target.value })
+                  }
                   required
                   className="w-full px-4 py-3 rounded-md border-input bg-background focus:outline-hidden focus:ring-2 focus:ring-primary resize-none"
                   placeholder="Hello, I'd like to talk about..."
