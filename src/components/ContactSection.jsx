@@ -12,6 +12,9 @@ import { useState } from "react";
 function ContactSection() {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -21,6 +24,9 @@ function ContactSection() {
         description: "Thank you for your message. I'll get back to you soon.",
       });
       setIsSubmitting(false);
+      setName("");
+      setEmail("");
+      setMessage("");
     }, 1500);
   };
   return (
@@ -80,13 +86,19 @@ function ContactSection() {
             <div className="pt-8">
               <h4 className="font-medium mb-4">Connect With Me</h4>
               <div className="flex space-x-4 justify-center">
-                <a href="https://www.linkedin.com/in/anitaoluwafunmilayodavid/" target="_blank">
+                <a
+                  href="https://www.linkedin.com/in/anitaoluwafunmilayodavid/"
+                  target="_blank"
+                >
                   <Linkedin />
                 </a>
                 <a href="https://x.com/the_anita_david" target="_blank">
                   <Twitter />
                 </a>
-                <a href="https://www.instagram.com/the_anita_david/" target="_blank">
+                <a
+                  href="https://www.instagram.com/the_anita_david/"
+                  target="_blank"
+                >
                   <Instagram />
                 </a>
               </div>
@@ -106,6 +118,8 @@ function ContactSection() {
                   type="text"
                   id="name"
                   name="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                   required
                   className="w-full px-4 py-3 rounded-md border-input bg-background focus:outline-hidden focus:ring-2 focus:ring-primary"
                   placeholder="Anita David..."
@@ -122,6 +136,8 @@ function ContactSection() {
                   type="email"
                   id="email"
                   name="email"
+                  value={email}
+                  onChange={(e)=> setEmail(e.target.value)}
                   required
                   className="w-full px-4 py-3 rounded-md border-input bg-background focus:outline-hidden focus:ring-2 focus:ring-primary"
                   placeholder="johndoe@gmail.com"
@@ -137,6 +153,8 @@ function ContactSection() {
                 <textarea
                   id="message"
                   name="message"
+                  value={message}
+                  onChange={(e)=> setMessage(e.target.value)}
                   required
                   className="w-full px-4 py-3 rounded-md border-input bg-background focus:outline-hidden focus:ring-2 focus:ring-primary resize-none"
                   placeholder="Hello, I'd like to talk about..."
