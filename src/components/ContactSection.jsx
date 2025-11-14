@@ -8,7 +8,7 @@ import cn from "../lib/utils";
 import { Send } from "lucide-react";
 import { useToast } from "../hooks/use-toast";
 import { useState } from "react";
-import emailjs from "@emailjs/browser";
+import emailjs from "@emailjs-com";
 
 function ContactSection() {
   const { toast } = useToast();
